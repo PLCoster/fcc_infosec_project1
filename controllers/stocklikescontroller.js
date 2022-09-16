@@ -9,6 +9,10 @@ const stockLikesController = {};
 stockLikesController.processStockQuery = (req, res, next) => {
   let { stock, like } = req.query;
 
+  if (!stock) {
+    return res.json({ error: 'Missing required "stock" query parameter' });
+  }
+
   if (typeof stock === 'string') {
     stock = [stock];
   } else if (stock.length > 2) {
