@@ -1,7 +1,13 @@
 // Set up mongoose connection to MONGO DB:
 const mongoose = require('mongoose');
+
+const MONGO_URI =
+  process.env.NODE_ENV === 'test'
+    ? process.env.TEST_MONGO_URI
+    : process.env.MONGO_URI;
+
 mongoose
-  .connect(process.env.MONGO_URI, {
+  .connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
