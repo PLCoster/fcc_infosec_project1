@@ -1,10 +1,19 @@
 'use strict';
 
-module.exports = function (app) {
+const {
+  processStockQuery,
+  addLikeForStocks,
+  getStockLikeCount,
+} = require('../controllers/stocklikescontroller');
 
-  app.route('/api/stock-prices')
-    .get(function (req, res){
-      
+module.exports = function (app) {
+  app
+    .route('/api/stock-prices')
+    .get(processStockQuery, addLikeForStocks, getStockLikeCount, (req, res) => {
+      if (res.locals.stockInfo.length === 1) {
+        return res.json({ stockData: res.locals.stockInfo[0] });
+      }
+
+      return res.json({ stockData: res.locals.stockInfo });
     });
-    
 };
