@@ -4,7 +4,8 @@
   "description": "Free Code Camp InfoSec Project 1: Stock Price Checker",
   "scripts": {
     "start": "node server.js",
-    "dev": "RUN_MODE=development nodemon server.js"
+    "dev": "RUN_MODE=development nodemon server.js",
+    "test": "NODE_ENV=test mocha --timeout 5000 --recursive --exit --ui tdd tests/"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
