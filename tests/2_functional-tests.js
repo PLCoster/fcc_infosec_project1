@@ -108,7 +108,7 @@ suite('Functional Tests', function () {
   });
 
   // Delete all StockLikes documents after running test suite
-  this.afterAll(function (done) {
+  suiteTeardown(function (done) {
     console.log('Emptying StockLikes collection after running tests...');
     StockLikes.deleteMany({})
       .then((res) => {
@@ -145,7 +145,9 @@ suite('Functional Tests', function () {
             .request(server)
             .get(`/api/stock-prices?stock=${stockTicker}`)
             .then((res) => {
-              checkSingleStockResponseValid(res, stockTicker, expectedLikes);
+              assert.isTrue(
+                checkSingleStockResponseValid(res, stockTicker, expectedLikes),
+              );
               done();
             })
             .catch((err) => done(err));
@@ -159,7 +161,9 @@ suite('Functional Tests', function () {
             .request(server)
             .get(`/api/stock-prices?stock=${stockTicker}&like=true`)
             .then((res) => {
-              checkSingleStockResponseValid(res, stockTicker, expectedLikes);
+              assert.isTrue(
+                checkSingleStockResponseValid(res, stockTicker, expectedLikes),
+              );
               done();
             })
             .catch((err) => done(err));
@@ -173,7 +177,9 @@ suite('Functional Tests', function () {
             .request(server)
             .get(`/api/stock-prices?stock=${stockTicker}&like=true`)
             .then((res) => {
-              checkSingleStockResponseValid(res, stockTicker, expectedLikes);
+              assert.isTrue(
+                checkSingleStockResponseValid(res, stockTicker, expectedLikes),
+              );
               done();
             })
             .catch((err) => done(err));
@@ -251,10 +257,12 @@ suite('Functional Tests', function () {
               `/api/stock-prices?stock=${stockTicker1}&stock=${stockTicker2}`,
             )
             .then((res) => {
-              checkTwoStockResponseValid(
-                res,
-                [stockTicker1, stockTicker2],
-                [expectedLikes1, expectedLikes2],
+              assert.isTrue(
+                checkTwoStockResponseValid(
+                  res,
+                  [stockTicker1, stockTicker2],
+                  [expectedLikes1, expectedLikes2],
+                ),
               );
               done();
             })
@@ -273,10 +281,12 @@ suite('Functional Tests', function () {
               `/api/stock-prices?stock=${stockTicker1}&stock=${stockTicker2}&like=true`,
             )
             .then((res) => {
-              checkTwoStockResponseValid(
-                res,
-                [stockTicker1, stockTicker2],
-                [expectedLikes1, expectedLikes2],
+              assert.isTrue(
+                checkTwoStockResponseValid(
+                  res,
+                  [stockTicker1, stockTicker2],
+                  [expectedLikes1, expectedLikes2],
+                ),
               );
 
               // Check that individual stock likes are incremented
@@ -286,7 +296,10 @@ suite('Functional Tests', function () {
                     .request(server)
                     .get(`/api/stock-prices?stock=${stockTicker}`)
                     .then((res) => {
-                      return checkSingleStockResponseValid(res, stockTicker, 1);
+                      assert.isTrue(
+                        checkSingleStockResponseValid(res, stockTicker, 1),
+                      );
+                      return true;
                     });
                 }),
               );
@@ -307,10 +320,12 @@ suite('Functional Tests', function () {
               `/api/stock-prices?stock=${stockTicker1}&stock=${stockTicker2}&like=true`,
             )
             .then((res) => {
-              checkTwoStockResponseValid(
-                res,
-                [stockTicker1, stockTicker2],
-                [expectedLikes1, expectedLikes2],
+              assert.isTrue(
+                checkTwoStockResponseValid(
+                  res,
+                  [stockTicker1, stockTicker2],
+                  [expectedLikes1, expectedLikes2],
+                ),
               );
 
               // Check that individual stock likes are incremented
@@ -320,7 +335,10 @@ suite('Functional Tests', function () {
                     .request(server)
                     .get(`/api/stock-prices?stock=${stockTicker}`)
                     .then((res) => {
-                      return checkSingleStockResponseValid(res, stockTicker, 1);
+                      assert.isTrue(
+                        checkSingleStockResponseValid(res, stockTicker, 1),
+                      );
+                      return true;
                     });
                 }),
               );
