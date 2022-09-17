@@ -2,6 +2,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -20,6 +21,16 @@ if (process.env.RUN_MODE === 'development') {
     next();
   });
 }
+
+// Enhance Security by setting headers with helmet
+app.use(helmet());
+
+// Required to Pass FCC Tests:
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: { defaultSrc: ["'self'"], scriptSrc: ["'self'"] },
+//   }),
+// );
 
 // Serve static files from 'public' folder
 // http://expressjs.com/en/starter/static-files.html
@@ -49,7 +60,7 @@ app.get('*', function (req, res) {
 
 // Internal Error Handler:
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  console.error(err);
   res.status(500).send('Internal Server error: See Server Logs');
 });
 

@@ -90,8 +90,9 @@ stockLikesController.addLikeForStocks = (req, res, next) => {
       return next();
     })
     .catch((err) => {
-      console.error('Error in stockLikesController.addLikeForStocks: ', err);
-      return next(err);
+      return next(
+        `Error in stockLikesController.addLikeForStocks: ${err.message}`,
+      );
     });
 };
 
