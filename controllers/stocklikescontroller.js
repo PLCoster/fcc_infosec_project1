@@ -42,7 +42,7 @@ stockLikesController.processStockQuery = (req, res, next) => {
             `Stock ticker ${stock[i]} could not be found by API - please check ticker is correct`,
           );
         } else {
-          const { symbol: stock, iexRealtimePrice: price } = result;
+          const { symbol: stock, latestPrice: price } = result;
           res.locals.stockInfo.push({ stock, price });
         }
       });
