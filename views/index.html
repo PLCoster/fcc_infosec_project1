@@ -2,59 +2,402 @@
 <html>
   <head>
     <title>Stock Price Checker</title>
-    <link
-      id="favicon"
-      rel="icon"
-      href="https://cdn.freecodecamp.org/universal/favicons/favicon-32x32.png"
-      type="image/x-icon"
+    <meta
+      name="description"
+      content="An example of the Free Code Camp Personal Library Project"
     />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="./public/style.css" />
+
+    <!-- FAVICONS -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/public/favicons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/public/favicons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/public/favicons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/public/site.webmanifest" />
+
+    <!-- STYLES -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link rel="stylesheet" href="/public/style.css" />
   </head>
   <body>
-    <header>
-      <h1>ISQA_5 - Nasdaq Stock Price Checker</h1>
-    </header>
-    <div id="userstories">
-      <h3>Example usage:</h3>
-      <code>/api/stock-prices?stock=GOOG</code>
-      <br />
-      <code>/api/stock-prices?stock=GOOG&amp;like=true</code>
-      <br />
-      <code>/api/stock-prices?stock=GOOG&amp;stock=MSFT</code>
-      <br />
-      <code>/api/stock-prices?stock=GOOG&amp;stock=MSFT&amp;like=true</code>
-      <br />
-      <h3>Example return:</h3>
-      <code>{"stockData":{"stock":"GOOG","price":786.90,"likes":1}}</code>
-      <br />
-      <code>
-        {"stockData":[{"stock":"MSFT","price":62.30,"rel_likes":-1},{"stock":"GOOG","price":786.90,"rel_likes":1}]}
-      </code>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href=".">Stock Price Checker</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                href="https://plcoster.github.io/homepage/"
+              >
+                Home
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownMenuLink"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                FreeCodeCamp QA Projects
+              </a>
+              <ul
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="https://fcc-qa-project1.plcoster.repl.co"
+                  >
+                    Metric - Imperial Converter
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="https://fcc-qa-project2.plcoster.repl.co"
+                  >
+                    Issue Tracker
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="https://fcc-qa-project3.plcoster.repl.co"
+                  >
+                    Personal Library
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="https://fcc-qa-project4.plcoster.repl.co"
+                  >
+                    Sudoku Solver
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="https://fcc-qa-project5.plcoster.repl.co"
+                  >
+                    American British Translator
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://plcoster.github.io/homepage/projects.html"
+              >
+                All Projects
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/PLCoster">
+                <i class="fab fa-github"></i> Github
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://linkedin.com/in/plcoster">
+                <i class="fab fa-linkedin"></i>
+                LinkedIn
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <main>
+        <header>
+          <h1>
+            <img
+              class="logo"
+              src="/public/logo.png"
+              alt="White icon of a stock price graph on a red square background"
+            />Stock Price Checker
+          </h1>
+        </header>
+
+        <hr />
+
+        <div class="d-flex flex-column align-items-center">
+          <section
+            id="testui"
+            class="d-flex flex-row justify-content-center flex-wrap"
+          >
+            <form id="testForm2" class="border">
+              <h4>Get Single Stock Price</h4>
+              <p>
+                <code>GET /api/stock-prices</code>
+              </p>
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                name="stock"
+                placeholder="Stock Symbol e.g. GOOG"
+                required=""
+              />
+              <div class="form-check">
+                <label class="form-check-label" for="single-stock-like"
+                  >Like this Stock</label
+                >
+                <input
+                  id="single-stock-like"
+                  class="form-check-input"
+                  type="checkbox"
+                  name="like"
+                  value="true"
+                />
+              </div>
+              <button class="btn btn-sm btn-danger" type="submit">
+                Get Price and Likes
+              </button>
+            </form>
+
+            <form id="testForm" class="border">
+              <h4>Compare Two Stocks</h4>
+              <p>
+                <code>GET /api/stock-prices</code>
+              </p>
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                name="stock"
+                placeholder="Symbol 1 e.g. GOOG"
+                required
+              />
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                name="stock"
+                placeholder="Symbol 2 e.g. MSFT"
+                required
+              />
+              <div class="form-check">
+                <label class="form-check-label" for="two-stock-like"
+                  >Like both Stocks</label
+                >
+                <input
+                  id="two-stock-like"
+                  class="form-check-input"
+                  type="checkbox"
+                  name="like"
+                  value="true"
+                />
+              </div>
+              <button class="btn btn-sm btn-danger" type="submit">
+                Compare Price and Likes
+              </button>
+            </form>
+          </section>
+          <div id="result-display">
+            <h4>Result:</h4>
+            <code id="jsonResult" class="block"
+              >Submit a form to see result!</code
+            >
+          </div>
+        </div>
+
+        <hr />
+
+        <section id="userstories">
+          <h3>Example Usage:</h3>
+
+          <h5>To Get Price and Likes for a Stock:</h5>
+          <ul class="usage-list">
+            <li>
+              Submit the 'Get Single Stock Price' form above with a valid stock
+              symbol (e.g. GOOG), and optionally select whether to like the
+              stock or not (only a single like is accepted for each stock per IP
+              address).
+            </li>
+            <li>
+              Alternatively, send a GET request to
+              <code>/api/stock-prices</code> with url encoded fields of
+              <code>stock</code> (stock symbol of desired stock, e.g. MSFT), and
+              optionally <code>like=true</code> to like the stock.
+            </li>
+            <br />
+            <strong>For Example:</strong>
+            <ul>
+              <li>
+                Get Google stock price info:
+                <code
+                  ><a href="/api/stock-prices?stock=GOOG"
+                    >/api/stock-prices?stock=GOOG</a
+                  ></code
+                >
+              </li>
+              <li>
+                Get MSFT stock price info and like the stock:
+                <code
+                  ><a href="/api/stock-prices?stock=MSFT&like=true"
+                    >/api/stock-prices?stock=MSFT&like=true</a
+                  ></code
+                >
+              </li>
+            </ul>
+          </ul>
+
+          <h5>To Compare the Price and Likes of Two Stocks:</h5>
+          <ul class="usage-list">
+            <li>
+              Submit the 'Compare Two Stocks' form above with two valid stock
+              symbols (e.g. GOOG / AMZN), and optionally select whether to like
+              both stocks or not (only a single like is accepted for each stock
+              per IP address).
+            </li>
+            <li>
+              Alternatively, send a GET request to
+              <code>/api/stock-prices</code> with two url encoded fields of
+              <code>stock</code> (stock symbol of desired stock, e.g. MSFT), and
+              optionally <code>like=true</code> to like both stocks.
+            </li>
+            <br />
+            <strong>For Example:</strong>
+            <ul>
+              <li>
+                Get Google and Microsoft stock price and like info:
+                <code
+                  ><a href="/api/stock-prices?stock=GOOG&stock=AMZN"
+                    >/api/stock-prices?stock=GOOG&stock=AMZN</a
+                  ></code
+                >
+              </li>
+              <li>
+                Get MSFT and Amazon stock price info, and like both stocks:
+                <code
+                  ><a href="/api/stock-prices?stock=MSFT&stock=AMZN&like=true"
+                    >/api/stock-prices?stock=MSFT&stock=AMZN&like=true</a
+                  ></code
+                >
+              </li>
+            </ul>
+          </ul>
+
+          <h3>Example Output:</h3>
+          <p>On requesting price information for a single stock:</p>
+
+          <code class="block">
+            {
+            <ul class="indent">
+              "stockData": {
+              <ul class="indent">
+                <li>"stock": "GOOG",</li>
+                <li>"price": "103.21",</li>
+                <li>"likes": 23,</li>
+              </ul>
+              }
+            </ul>
+            }
+          </code>
+
+          <p>On requesting price information for two stocks:</p>
+
+          <code class="block">
+            {
+            <ul class="indent">
+              "stockData": [
+              <br />
+              {
+              <ul class="indent">
+                <li>"stock": "GOOG",</li>
+                <li>"price": "103.21",</li>
+                <li>"likes": 23,</li>
+                <li>"rel_likes": -4,</li>
+              </ul>
+              },
+              <br />
+              {
+              <ul class="indent">
+                <li>"stock": "MSFT",</li>
+                <li>"price": "242.59",</li>
+                <li>"likes": 27,</li>
+                <li>"rel_likes": 4,</li>
+              </ul>
+              }]
+            </ul>
+            }
+          </code>
+
+          <p>
+            If an invalid stock symbol is sent, or a required stock query
+            parameter is missing, a JSON with an 'error' property is returned
+            explaining the problem.
+          </p>
+        </section>
+      </main>
+
+      <hr />
+
+      <footer>
+        <p>
+          A project set by
+          <a href="https://www.freecodecamp.org/">freeCodeCamp</a>
+        </p>
+      </footer>
     </div>
-    <hr class="p-50" />
-    <div id="testui">
-      <h2 class="text-align-left">Front-End:</h2>
-      <h3>Get single price and total likes</h3>
-      <form id="testForm2" class="border">
-        <input type="text" name="stock" placeholder="GOOG" required="" />
-        <input type="checkbox" name="like" value="true" /> Like?
-        <br />
-        <button type="submit">Get Price!</button>
-      </form>
-      <h3>Compare and get relative likes</h3>
-      <form id="testForm" class="border">
-        <input type="text" name="stock" placeholder="GOOG" required="" />
-        <input type="text" name="stock" placeholder="MSFT" required="" />
-        <input type="checkbox" name="like" value="true" /> Like both?
-        <br />
-        <button type="submit">Get Price!</button>
-      </form>
-      <code id="jsonResult"></code>
-    </div>
-    <hr class="m-50 mt-200" />
+
+    <!-- Bootstrap Script -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- CUSTOM FORM SCRIPTS -->
     <script src="/public/script.js"></script>
   </body>
 </html>
