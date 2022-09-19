@@ -15,14 +15,6 @@ module.exports = function (app) {
         return res.json({ stockData: res.locals.stockInfo[0] });
       }
 
-      // If two stocks requested, only return relative like data
-      const relativeData = res.locals.stockInfo.map(
-        ({ stock, price, rel_likes }) => ({
-          stock,
-          price,
-          rel_likes,
-        }),
-      );
-      return res.json({ stockData: relativeData });
+      return res.json({ stockData: res.locals.stockInfo });
     });
 };
