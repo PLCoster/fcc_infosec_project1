@@ -48,7 +48,12 @@ function checkSingleStockResponseValid(response, stockTicker, expectedLikes) {
 }
 
 // Helper function to check that response when requesting a two stock tickers is valid
-function checkTwoStockResponseValid(response, tickerArr, relLikesArr) {
+function checkTwoStockResponseValid(
+  response,
+  tickerArr,
+  likesArr,
+  relLikesArr,
+) {
   assert.equal(response.status, 200, 'Response status should be 200');
   assert.equal(
     response.type,
@@ -74,7 +79,7 @@ function checkTwoStockResponseValid(response, tickerArr, relLikesArr) {
   response.body.stockData.forEach((data, i) => {
     assert.hasAllKeys(
       data,
-      ['stock', 'price', 'rel_likes'],
+      ['stock', 'price', 'likes', 'rel_likes'],
       'Stock Data Object should have expected keys',
     );
     assert.equal(
@@ -83,6 +88,11 @@ function checkTwoStockResponseValid(response, tickerArr, relLikesArr) {
       'Stock info ticker should match requested ticker',
     );
     assert.isNumber(data.price, 'Stock info price should be a number');
+    assert.equal(
+      data.likes,
+      likesArr[i],
+      'Stock info rel_likes should match expected number of rel_likes',
+    );
     assert.equal(
       data.rel_likes,
       relLikesArr[i],
@@ -247,9 +257,9 @@ suite('Functional Tests', function () {
       function () {
         test('GET /api/stock-prices with two stock query params returns info and relative likes for both stocks', function (done) {
           const stockTicker1 = 'GOOG';
-          const expectedLikes1 = 1;
           const stockTicker2 = 'MSFT';
-          const expectedLikes2 = -1;
+          const expectedLikes = [1, 0];
+          const expectedRelLikes = [1, -1];
 
           chai
             .request(server)
@@ -261,7 +271,8 @@ suite('Functional Tests', function () {
                 checkTwoStockResponseValid(
                   res,
                   [stockTicker1, stockTicker2],
-                  [expectedLikes1, expectedLikes2],
+                  expectedLikes,
+                  expectedRelLikes,
                 ),
               );
               done();
@@ -271,9 +282,9 @@ suite('Functional Tests', function () {
 
         test('GET /api/stock-prices with two stock query params and like=true likes both stocks if they were not previously liked', function (done) {
           const stockTicker1 = 'AAPL';
-          const expectedLikes1 = 0; // Relative likes are 0 when both are liked
           const stockTicker2 = 'AMZN';
-          const expectedLikes2 = 0;
+          const expectedLikes = [1, 1];
+          const expectedRelLikes = [0, 0];
 
           chai
             .request(server)
@@ -285,7 +296,8 @@ suite('Functional Tests', function () {
                 checkTwoStockResponseValid(
                   res,
                   [stockTicker1, stockTicker2],
-                  [expectedLikes1, expectedLikes2],
+                  expectedLikes,
+                  expectedRelLikes,
                 ),
               );
 
@@ -310,9 +322,9 @@ suite('Functional Tests', function () {
 
         test('GET /api/stock-prices with two stock query params and like=true likes a stock that was not previously liked', function (done) {
           const stockTicker1 = 'GOOG';
-          const expectedLikes1 = 0; // Relative likes are 0 when both have 1 like
           const stockTicker2 = 'MSFT';
-          const expectedLikes2 = 0;
+          const expectedLikes = [1, 1];
+          const expectedRelLikes = [0, 0];
 
           chai
             .request(server)
@@ -324,7 +336,8 @@ suite('Functional Tests', function () {
                 checkTwoStockResponseValid(
                   res,
                   [stockTicker1, stockTicker2],
-                  [expectedLikes1, expectedLikes2],
+                  expectedLikes,
+                  expectedRelLikes,
                 ),
               );
 
