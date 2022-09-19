@@ -42,6 +42,7 @@ document.getElementById('testForm2').addEventListener('submit', (e) => {
   e.preventDefault();
 
   const resultsElement = document.getElementById('jsonResult');
+  resultsElement.innerHTML = '';
   resultsElement.classList.remove('error');
 
   const stock = e.target[0].value;
@@ -72,6 +73,7 @@ document.getElementById('testForm').addEventListener('submit', (e) => {
   e.preventDefault();
 
   const resultsElement = document.getElementById('jsonResult');
+  resultsElement.innerHTML = '';
   resultsElement.classList.remove('error');
 
   const stock1 = e.target[0].value;
