@@ -88,6 +88,10 @@ code ul.indent {
   margin-bottom: 0;
 }
 
+p.note {
+  text-align: center;
+}
+
 .footer {
   margin-top: 40px;
 }
