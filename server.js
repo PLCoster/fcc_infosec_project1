@@ -23,7 +23,23 @@ if (process.env.RUN_MODE === 'development') {
 }
 
 // Enhance Security by setting headers with helmet
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        'script-src': [
+          "'self'",
+          'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js',
+        ], // Allow bootstrap script CDN
+        'style-src': [
+          "'self'",
+          'https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css',
+          'https://use.fontawesome.com/releases/v5.15.4/css/all.css',
+        ],
+      },
+    },
+  }),
+);
 
 // Required to Pass FCC Tests:
 // app.use(
